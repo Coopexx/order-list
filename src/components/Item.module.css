@@ -1,0 +1,14 @@
+.row {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+
+.column {
+    flex: 1;
+}
+
+.column:not(:last-child) {
+    border-right: 1px solid #000;
+}

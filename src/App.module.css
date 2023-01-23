@@ -52,5 +52,21 @@
 .window {
     background-color: #ffffff;
     width: 50vw;
-    height: 50vh;
+    height: fit-content;
+}
+
+.edit {
+    position: fixed;
+    right: 5rem;
+    bottom: 5rem;
+    background-color: #ffffff;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    border-radius: 30%;
+    font-size: 25px;
+    border: 1px solid #000;
+    transition: transform 200ms ease-in-out;
+}
+
+.edit:hover {
+    transform: rotate(45deg);
 }
