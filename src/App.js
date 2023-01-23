@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import Item from './components/Item'
-import Navigation from './components/Navigation'
-import Description from './components/Description'
+import React, { useState, useEffect } from 'react';
+import Item from './components/Item';
+import Navigation from './components/Navigation';
+import Description from './components/Description';
 
-import styles from './App.module.css'
+import styles from './App.module.css';
 
 function App() {
     const DUMMY_DATA = [
@@ -28,28 +28,42 @@ function App() {
             amount: '42',
         },
         { id: '4', code: 'ZG04-02', name: 'T75 Flask', amount: '96' },
-    ]
+    ];
 
-    const [list, setList] = useState(DUMMY_DATA)
-    const [error, setError] = useState(false)
+    const [list, setList] = useState(DUMMY_DATA);
+    const [error, setError] = useState(false);
+
+    // const url = 'https://dog.ceo/api/breeds/image/random';
+    const url = 'http://127.0.0.1:3000/api/v1/items';
+
+    async function fetchItemsHandler() {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        setList(data);
+    }
 
     const filterHandler = (search) => {
         if (typeof search !== 'string' || search.length === 0) {
-            setError(true)
+            setError(true);
         } else {
-            setError(false)
+            setError(false);
         }
         let filtered = DUMMY_DATA.filter((data) => {
             if (data.name.toLowerCase().includes(search.toLowerCase())) {
-                return true
+                return true;
             }
             if (data.code.toLowerCase().includes(search.toLowerCase())) {
-                return true
+                return true;
             }
-            return false
-        })
-        setList(filtered)
-    }
+            return false;
+        });
+        setList(filtered);
+    };
+
+    useEffect(() => {
+        fetchItemsHandler();
+    }, []);
 
     return (
         <div className={styles.background}>
@@ -62,7 +76,7 @@ function App() {
             </div>
             <div className={styles.edit}>+</div>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
