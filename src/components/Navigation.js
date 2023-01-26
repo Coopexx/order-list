@@ -1,43 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import styles from './Navigation.module.css'
+import styles from './Navigation.module.css';
 
 const Navigation = (props) => {
-    const [textfield, setTextfield] = useState('')
-    const [filter, setFilter] = useState('')
+    const [textfield, setTextfield] = useState('');
+    const [filter, setFilter] = useState('');
+    const [mode, setMode] = useState(true); //true = Orders, false = All
 
     const showTextfield = () => {
         if (textfield) {
-            setTextfield('')
+            setTextfield('');
         } else {
-            setTextfield(1)
+            setTextfield(1);
         }
-    }
-
-    const filterHandler = (event) => {
-        event.preventDefault()
-        setFilter('')
-    }
-
-    let errorStyle = ''
+    };
 
     const filterChangeHandler = (event) => {
-        setFilter(event.target.value)
-        console.log(props.error)
-        console.log(errorStyle)
-        props.filterHandler(event.target.value)
-    }
+        setFilter(event.target.value);
+        props.filterHandler(event.target.value);
+    };
+
+    const changeModeHandler = () => {
+        if (mode == true) {
+            setMode(false);
+        } else {
+            setMode(true);
+        }
+        console.log(mode);
+    };
 
     return (
         <div className={styles.background}>
-            <div className={styles.column}>Order List</div>
+            <div className={styles.column}>
+                <label className={styles.switch} onClick={changeModeHandler}>
+                    <input type="checkbox" />
+                    <span className={`${styles.slider} + ${styles.round}`}>
+                        <span className={styles.orders}>Orders</span>
+                        <span className={styles.all}>All</span>
+                    </span>
+                </label>
+            </div>
             <div className={styles.filterDiv}>
                 {textfield && (
-                    <form onSubmit={filterHandler}>
-                        <input
-                            onChange={filterChangeHandler}
-                            className={`${props.error ? styles.error : ''}`}
-                        ></input>
+                    <form>
+                        <input onChange={filterChangeHandler}></input>
                     </form>
                 )}
 
@@ -54,7 +60,7 @@ const Navigation = (props) => {
                 </svg>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Navigation
+export default Navigation;

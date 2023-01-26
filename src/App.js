@@ -6,59 +6,60 @@ import Description from './components/Description';
 import styles from './App.module.css';
 
 function App() {
-    const DUMMY_DATA = [
-        { id: '0', code: 'ZG05-04', name: 'Hyperflask M', amount: '12' },
-        {
-            id: '1',
-            code: 'ZG03-03',
-            name: 'Cellstack (10 layers)',
-            amount: '12',
-        },
-        {
-            id: '2',
-            code: 'LM041-01',
-            name: 'Serological Pipette 10mL',
-            amount: '4',
-        },
-        {
-            id: '3',
-            code: 'LM042-03',
-            name: 'Centrifugation Tube (500mL)',
+    const [list, setList] = useState({});
+    const [filteredList, setFilteredList] = useState({});
+    const [listLoaded, setListLoaded] = useState(false);
 
-            amount: '42',
-        },
-        { id: '4', code: 'ZG04-02', name: 'T75 Flask', amount: '96' },
-    ];
-
-    const [list, setList] = useState(DUMMY_DATA);
-    const [error, setError] = useState(false);
-
-    // const url = 'https://dog.ceo/api/breeds/image/random';
     const url = 'http://127.0.0.1:3000/api/v1/items';
+
+    const removeEmptyAmounts = (data) => {
+        let orders = data.filter((dataObj) => {
+            if (dataObj.amount > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        setList(orders);
+        setFilteredList(orders);
+        setListLoaded(true);
+    };
 
     async function fetchItemsHandler() {
         const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setList(data);
+        const rawData = await response.json();
+        const data = rawData.map((dataObj) => {
+            return {
+                id: dataObj._id,
+                name: dataObj.name,
+                code: dataObj.code,
+                amount: dataObj.amount,
+            };
+        });
+
+        removeEmptyAmounts(data);
     }
 
     const filterHandler = (search) => {
-        if (typeof search !== 'string' || search.length === 0) {
-            setError(true);
-        } else {
-            setError(false);
-        }
-        let filtered = DUMMY_DATA.filter((data) => {
-            if (data.name.toLowerCase().includes(search.toLowerCase())) {
+        let filtered = list.filter((data) => {
+            if (
+                data.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase().replace(/\s/g, ''))
+            ) {
                 return true;
             }
-            if (data.code.toLowerCase().includes(search.toLowerCase())) {
+            if (
+                data.code
+                    .toLowerCase()
+                    .includes(search.toLowerCase().replace(/\s/g, ''))
+            ) {
                 return true;
+            } else {
+                return false;
             }
-            return false;
         });
-        setList(filtered);
+        setFilteredList(filtered);
     };
 
     useEffect(() => {
@@ -68,11 +69,12 @@ function App() {
     return (
         <div className={styles.background}>
             <div className={styles.window}>
-                <Navigation filterHandler={filterHandler} error={error} />
+                <Navigation filterHandler={filterHandler} />
                 <Description />
-                {list.map((data, i) => (
-                    <Item data={list[i]} key={data.id} />
-                ))}
+                {listLoaded &&
+                    filteredList.map((data, i) => (
+                        <Item data={list[i]} key={data.id} />
+                    ))}
             </div>
             <div className={styles.edit}>+</div>
         </div>

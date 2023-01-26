@@ -1,7 +1,6 @@
 .row {
     display: flex;
     justify-content: space-evenly;
-    border-bottom: 1px solid #000;
     text-align: center;
     background-color: #dbd5e3;
 }
