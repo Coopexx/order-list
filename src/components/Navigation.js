@@ -1,3 +1,4 @@
+import { click } from '@testing-library/user-event/dist/click';
 import React, { useState } from 'react';
 
 import styles from './Navigation.module.css';
@@ -5,7 +6,6 @@ import styles from './Navigation.module.css';
 const Navigation = (props) => {
     const [textfield, setTextfield] = useState('');
     const [filter, setFilter] = useState('');
-    const [mode, setMode] = useState(true); //true = Orders, false = All
 
     const showTextfield = () => {
         if (textfield) {
@@ -14,6 +14,10 @@ const Navigation = (props) => {
             setTextfield(1);
         }
     };
+    const formSubmitHandler = (event) => {
+        event.preventDefault();
+        setFilter('');
+    };
 
     const filterChangeHandler = (event) => {
         setFilter(event.target.value);
@@ -21,19 +25,16 @@ const Navigation = (props) => {
     };
 
     const changeModeHandler = () => {
-        if (mode == true) {
-            setMode(false);
-        } else {
-            setMode(true);
-        }
-        console.log(mode);
+        props.toggleViewHandler();
+        setFilter('');
+        setTextfield('');
     };
 
     return (
         <div className={styles.background}>
             <div className={styles.column}>
-                <label className={styles.switch} onClick={changeModeHandler}>
-                    <input type="checkbox" />
+                <label className={styles.switch}>
+                    <input type="checkbox" onClick={changeModeHandler} />
                     <span className={`${styles.slider} + ${styles.round}`}>
                         <span className={styles.orders}>Orders</span>
                         <span className={styles.all}>All</span>
@@ -42,8 +43,11 @@ const Navigation = (props) => {
             </div>
             <div className={styles.filterDiv}>
                 {textfield && (
-                    <form>
-                        <input onChange={filterChangeHandler}></input>
+                    <form onSubmit={formSubmitHandler}>
+                        <input
+                            onChange={filterChangeHandler}
+                            value={filter}
+                        ></input>
                     </form>
                 )}
 

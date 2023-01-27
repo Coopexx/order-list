@@ -41,9 +41,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-
     background-color: #e7e5ee;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,4 +72,10 @@
 
 .edit:hover {
     transform: rotate(45deg);
+}
+
+.itemContainer {
+    max-height: 50vh;
+    overflow: hidden;
+    overflow-y: scroll;
 }

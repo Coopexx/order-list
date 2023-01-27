@@ -4,11 +4,14 @@ import Navigation from './components/Navigation';
 import Description from './components/Description';
 
 import styles from './App.module.css';
+import { serialize } from 'bson';
 
 function App() {
     const [list, setList] = useState({});
     const [filteredList, setFilteredList] = useState({});
+    const [renderedList, setRenderedList] = useState({});
     const [listLoaded, setListLoaded] = useState(false);
+    const [mode, setMode] = useState(false); //true = Orders, false = All
 
     const url = 'http://127.0.0.1:3000/api/v1/items';
 
@@ -20,11 +23,12 @@ function App() {
                 return false;
             }
         });
-        setList(orders);
         setFilteredList(orders);
+        setRenderedList(orders);
         setListLoaded(true);
     };
 
+    //DATA IMPORT
     async function fetchItemsHandler() {
         const response = await fetch(url);
         const rawData = await response.json();
@@ -36,30 +40,64 @@ function App() {
                 amount: dataObj.amount,
             };
         });
-
+        setList(data);
         removeEmptyAmounts(data);
     }
 
-    const filterHandler = (search) => {
-        let filtered = list.filter((data) => {
-            if (
-                data.name
-                    .toLowerCase()
-                    .includes(search.toLowerCase().replace(/\s/g, ''))
-            ) {
-                return true;
-            }
-            if (
-                data.code
-                    .toLowerCase()
-                    .includes(search.toLowerCase().replace(/\s/g, ''))
-            ) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-        setFilteredList(filtered);
+    //FILTER
+    const filterHandler = (searchString) => {
+        if (mode) {
+            let filtered = list.filter((data) => {
+                if (
+                    data.name
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
+                ) {
+                    return true;
+                }
+                if (
+                    data.code
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            setRenderedList(filtered);
+        } else {
+            let filtered = filteredList.filter((data) => {
+                if (
+                    data.name
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
+                ) {
+                    return true;
+                }
+                if (
+                    data.code
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            setRenderedList(filtered);
+        }
+    };
+
+    //SWITCH BUTTON VIEW
+    const toggleViewHandler = () => {
+        if (mode === true) {
+            setMode(false);
+            setRenderedList(filteredList);
+        } else {
+            setMode(true);
+            setRenderedList(list);
+        }
     };
 
     useEffect(() => {
@@ -69,14 +107,18 @@ function App() {
     return (
         <div className={styles.background}>
             <div className={styles.window}>
-                <Navigation filterHandler={filterHandler} />
+                <Navigation
+                    filterHandler={filterHandler}
+                    toggleViewHandler={toggleViewHandler}
+                />
                 <Description />
-                {listLoaded &&
-                    filteredList.map((data, i) => (
-                        <Item data={list[i]} key={data.id} />
-                    ))}
+                <div className={styles.itemContainer}>
+                    {listLoaded &&
+                        renderedList.map((data, i) => (
+                            <Item data={renderedList[i]} key={data.id} />
+                        ))}
+                </div>
             </div>
-            <div className={styles.edit}>+</div>
         </div>
     );
 }

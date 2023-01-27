@@ -1,5 +1,6 @@
 .row {
     display: flex;
+    position: relative;
     justify-content: space-evenly;
     text-align: center;
 }
@@ -11,6 +12,16 @@
     flex: 1;
 }
 
-.column:not(:last-child) {
+.borderChild {
     border-right: 1px solid #000;
+}
+
+.trash {
+    color: red;
+    position: absolute;
+    right: 0;
+    width: 2rem;
+    /* set width same as height for rectangle */
+    height: 100%;
+    border: 1px solid black;
 }
