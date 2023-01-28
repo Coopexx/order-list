@@ -4,7 +4,6 @@ import Navigation from './components/Navigation';
 import Description from './components/Description';
 
 import styles from './App.module.css';
-import { serialize } from 'bson';
 
 function App() {
     const [list, setList] = useState({});
