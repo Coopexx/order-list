@@ -5,8 +5,8 @@ const Description = () => {
     return (
         <div className={styles.row}>
             <p className={styles.column}>Item</p>
-            <p className={styles.column}>Exact Code</p>
-            <p className={styles.column}>Amount</p>
+            <p className={`${styles.column} ${styles.flex}`}>Exact Code</p>
+            <p className={`${styles.column} ${styles.flex}`}>Amount</p>
         </div>
     );
 };

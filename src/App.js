@@ -14,7 +14,7 @@ function App() {
 
     const url = 'http://127.0.0.1:3000/api/v1/items';
 
-    const removeEmptyAmounts = (data) => {
+    const removeEmptyAmounts = (data, type) => {
         let orders = data.filter((dataObj) => {
             if (dataObj.amount > 0) {
                 return true;
@@ -22,13 +22,22 @@ function App() {
                 return false;
             }
         });
-        setFilteredList(orders);
-        setRenderedList(orders);
+        let flaggedOrders = orders.map((order) => {
+            return { ...order, flag: true };
+        });
+        setFilteredList(flaggedOrders);
+        if (type === 'patch') {
+            setRenderedList(data);
+        } else if (type === 'delete') {
+            setRenderedList(flaggedOrders);
+        } else {
+            setRenderedList(flaggedOrders);
+        }
         setListLoaded(true);
     };
 
     //DATA IMPORT
-    async function fetchItemsHandler() {
+    async function fetchItemsHandler(type) {
         const response = await fetch(url);
         const rawData = await response.json();
         const data = rawData.map((dataObj) => {
@@ -40,7 +49,7 @@ function App() {
             };
         });
         setList(data);
-        removeEmptyAmounts(data);
+        removeEmptyAmounts(data, type);
     }
 
     //FILTER
@@ -99,6 +108,46 @@ function App() {
         }
     };
 
+    //SERVER REQUESTS
+    //UPDATE dbAmount + itemAmount
+    const addAmountHandler = async (dataObj) => {
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObj),
+            });
+            const content = await response.json();
+            //Include in notification upper right corner
+            // console.log(content);
+            fetchItemsHandler('patch');
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const removeAmountHandler = async (dataObj) => {
+        try {
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObj),
+            });
+            const content = await response.json();
+            //Include in notification upper right corner
+            // console.log(content);
+            fetchItemsHandler('delete');
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         fetchItemsHandler();
     }, []);
@@ -114,7 +163,13 @@ function App() {
                 <div className={styles.itemContainer}>
                     {listLoaded &&
                         renderedList.map((data, i) => (
-                            <Item data={renderedList[i]} key={data.id} />
+                            <Item
+                                data={renderedList[i]}
+                                key={data.id}
+                                add={addAmountHandler}
+                                remove={removeAmountHandler}
+                                flagged={data.flag}
+                            />
                         ))}
                 </div>
             </div>

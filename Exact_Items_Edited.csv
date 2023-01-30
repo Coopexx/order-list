@@ -900,7 +900,6 @@ ME098-01;M3 base medium;0
 ME099-00;EmbryoMax 0,1 % Gelatinelösung 500 ML;0
 ME100-00;CTS Synth-a-Freeze Medium 50ml;0
 ME258-05;NFM-G2;0
-REGEN;Regeneration der Harze einer VE Patrone (39-46Liter);0
 RX301-01;alpha-CD54;0
 RX302-02;alpha-CD86;0
 RX303-01;Isotype control;0
@@ -931,9 +930,6 @@ RX720-06;PLD staining solution;0
 RX740-01;PMS Solution;0
 RX758-06;XTT cell viability assay;0
 RX758-15;XTT cell viability assay;0
-SA;LS Service Agreements Instruments Performance Blue;0
-TG01-00;CO2 (Gas) UN 1013 Kohlendioxid 2.2, (C/E), 40 L, Westfalen;0
-TG02-00;Flüssigstickstoff (Westfalen);0
 VV01-01;"Styroporbox EPS-Box (klein); LBH 350*350*370; #11066G";0
 VV01-02;"Styroporbox EPS-Box (GROSS); LBH 520*360*335; #13630-G";0
 VV01-03;"Styroporbox EPS-Box (Kit); LBH  265 x 265 x 245 mm; #10423-0";0
@@ -984,172 +980,6 @@ VV29-00;Cloud-Lizenz Advanced f.36 M- 0526 0733 0526 0733;0
 VV30-00;Kryobox, PC, 133×133×52 mm, Fächer 10×10, blau;0
 VV30-01;Kryobox, PC, 133×133×52 mm, Fächer 10×10, rot;0
 VV30-02;Kryobox, PC, 133×133×52 mm, Fächer 10×10, gelb;0
-WB01-00;Advertisement 114mm wide x 70mm deep for DD;0
-WB02-00;acCELLerate im 19. German Biotech Guide 2017;0
-XXXKR001-02;Ethanol 70% (V/V) Hofmann‘s® (unvergällt) 100 ml;0
-XXXKR001-03;"Ethanol Eurodenatured ≥96% 5 l; GPR RECTAPUR® (1:1:1)";0
-XXXKR001-04;Ethanol 70% (V/V) Hofmann‘s® (unvergällt) 500 ml;0
-XXXKR003-02;Ribonuclease A (50 mg);0
-XXXKR003-03;Ribonuclease A (100 mg);0
-XXXKR005-00;Luciferase Assay (100 Reactions);0
-XXXKR008-00;PCR Mycoplasma Test Kit (96);0
-XXXKR014-01;LYSO-ID® Red detection kit, 100 tests, #ENZ-51005-0100;0
-XXXKR015-00;293fectin™ Transfection Reagent;0
-XXXKR016-00;SYTOX® Green Dead Cell Stain, for flow cytometry;0
-XXXKR018-00;62AM4PEB, cAMP dynamic Kit - 1000 tests;0
-XXXKR019-00;EVAGREEN, 2000X IN DMSO 1 * 50 µl / VWR #31019;0
-XXXKR036-00;Low Density Lipoprotein, BODIPY™ FL;0
-XXXKR037-00;VenorGeM Classic (100 rxn);0
-XXXKR047-00;L-PEI (2 g);0
-XXXKR051-03;holo-Transferrin bovine 50MG, Thermo #11107018;0
-XXXKR051-04;"Fetuin, Fetal Bovine Serum; Sigma #341506-1GM";0
-XXXKR051-06;Amphotericin B, 250 µg/ml, PAN #P06-01005S;0
-XXXKR052-00;"MultiTox-Fluor Multiplex Cytotoxicity Assay; 10 ml #G9200";0
-XXXKR056-00;TransIT-LT1 Transfection Reagent 1 ml;0
-XXXKR062-02;IL-2 - human (1E5 IU);0
-XXXKR066-00;"Sodium chloride solution; Sigma# S8776-100ML";0
-XXXKR067-00;"Cell Sorting Set-up Beads; Thermo #C16508";0
-XXXKR068-01;"IL-6 Human Uncoated ELISA Kit with Plates; Thermo#88-7066-22";0
-XXXKR068-04;"IL-6 Human Uncoated ELISA Kit; #88-7066-77; 20 x 96 tests";0
-XXXKR072-01;rec. hum. IL-2 (50µg), Sigma-Aldrich;0
-XXXKR072-03;rec. hum. IL-2 (50µg), PeproTech;0
-XXXKR072-04;rec. hum. IL-2 (250µg), PeproTech;0
-XXXKR072-05;rec. hum. IL-5 (10µg), PeproTech, animal-free;0
-XXXKR072-08;rec. hum. IL-5, Thermo, 1x 10µg;0
-XXXKR072-09;rec. hum. IL-5, Thermo, 100 µg (10x 10µg);0
-XXXKR073-03;PKG, PC7 (770/488) SET-UP KIT;0
-XXXKR074-00;XTT (250 mg);0
-XXXKR074-02;XTT - Natriumsalz BioChemica;0
-XXXKR075-01;Recombinant Human IL-10 Protein (R&D) with Carrier;0
-XXXKR076-00;Agarose Low melting Point;0
-XXXKR076-01;Gelatin from porcine skin;0
-XXXKR082-03;Recombinant Human/Murine/Rat GDF-11 5µg;0
-XXXKR082-07;"rec. hum. IL-36 beta/IL-1F8; 25 ug R&D Systems";0
-XXXKR087-00;LYSO-ID(R) red detection reagent 5000 tests (1900 USD);0
-XXXKR089-00;"Digitonin; Sigma# D141-100MG";0
-XXXKR097-00;Zinc Oxide (5 g);0
-XXXKR098-00;"Copper(II) oxide; Sigma #544868-5G";0
-XXXKR099-00;Tungsten carbide, 99.5% (metals basis) 100g;0
-XXXKR100-00;Copper(II) oxide, nanopowder 10g;0
-XXXKR101-00;Titanium(IV) oxide, NanoArc™ 25g;0
-XXXKR102-00;Phagocytosis Assay Kit (IgG FITC);0
-XXXKR107-00;"AssayComplete™ Cell Culture Kit-103; DiscoverX #92-3103G";0
-XXXKR108-00;"Cell Detachment Reagent; DiscoverX #92-0009";0
-XXXKR111-00;Immersionsöl / Immersion oil 50 mL;0
-XXXKR112-00;Globulins Cohn fraction II, III human;0
-XXXKR115-00;"Benzo[a]pyrene; Sigma #B1760-100MG";0
-XXXKR116-00;"SepsiTest-UMD CE IVD; 1x12 React. Molzym #U-010-012";0
-XXXKR121-00;"Pierce™ Chromogenic Endotoxin Quant Kit; Thermo #A39552S";0
-XXXKR122-01;Agarose Low Melting EEO;0
-XXXKR125-00;"Zelllinie MDBK (NBL-1); CLS #600396";0
-XXXKR127-00;"Peptidoglycan PGN-ECndss ultrapure; InvivoGen #tlrl-ksspgn";0
-XXXKR129-00;"Zelllinie 3T3-L1; CLS #400103";0
-XXXKR133-02;"Bio-Glo™ Luciferase Assay System 100ml; G7940";0
-XXXKR134-00;"Passive Lysis 5X Buffer; Promega #E1941";0
-XXXKR138-00;Zelllinie HuH7;0
-XXXLG01-03;Lieferung frei Verwendungsstelle HeraGuard;0
-XXXLM003-00;Dismozon Pur (100 Beutel) 30g Beutel;0
-XXXLM013-00;Pipettenspitze, 50 - 1.250 µl,  farblos, unsteril;0
-XXXLM013-04;Biosphere Tips, 50 - 1.250 µl, lang;0
-XXXLM013-07;Biosphere, LowRet. FILTER-Tips, 2 - 20 µl;0
-XXXLM042-03;"Zentrifugenröhrchen 50 ml; Corning #352070";0
-XXXLM045-03;Corning 2 mL Internal Threaded Polypropylene Cryogenic Vial;0
-XXXLM045-04;"FluidX 2D Barcoded 2.0ml Cryo Tube; Brooks";0
-XXXLM046-03;"Filtrationsauffanggefäße mit Verschluss 250 ml; VWR#391-0283";0
-XXXLM056-00;Kombinierte pH-Elektroden mit integriertem Temperaturfühler;0
-XXXLM057-00;Messbecher mit Griff 5000 ml;0
-XXXLM058-00;Instrumentenschalen mit Knopfdeckel 260×150×50 mm;0
-XXXLM060-00;"Becherglas hohe Form, VE 10; VWR # 213-1170";0
-XXXMD148-01;XXXRecovery Buffer C;0
-XXXMD163-01;XXXRecovery Buffer A;0
-XXXMD178-05;Recovery Buffer H;0
-XXXMD363-05;Assay Buffer A;0
-XXXMD451-06;Assay Medium D;0
-XXXMD451-50;Assay Medium D;0
-XXXMD463-01;Assay Medium A;0
-XXXME001-04;RPMI-1640, without phenolred, Sigma#  R7509-6X500ML;0
-XXXME001-05;RPMI-1640, without phenolred, Sigma#  R7509-6X1L;0
-XXXME002-03;"Alpha MEM Eagle, w: Ribonucleos.; 24x500ML";0
-XXXME002-04;"Alpha MEM Eagle, w: Ribonucleos.; 6x500ML";0
-XXXME002-05;Alpha MEM Eagle, ohne Nucleoside, 6x500 ML;0
-XXXME004-06;"DMEM/F12 with Phenol red; Sigma #D6421-6X500ML";0
-XXXME004-07;DMEM (high gluc, w/o L-Gln, with Phen red, w/o NaPy) 1000ml;0
-XXXME005-08;"DMEM/F12, with HEPES, NaHC, w/o L-Gln, phenol red; (Bundle)";0
-XXXME005-09;DMEM/F12, with HEPES, NaHC, phenol red, w/o L-Gln;0
-XXXME006-01;IMDM, with phenol red;0
-XXXME008-04;McCoy's 5A, w/o phenolred;0
-XXXME009-00;EX-CELL® 420 Serum-Free Medium for Insect Cells;0
-XXXME010-03;Nutrient Mixture Ham's F12 Kaighn's, Sigma, N3520-10x 1L;0
-XXXME010-04;Nutrient Mixture Ham's F12, Sigma, N4888-6X500ML;0
-XXXME013-01;Glucose solution, (100 g/L, autoclaved)(PAN-Biotech);0
-XXXME016-03;IMDM (with Phenol red, low Glucose);0
-XXXME017-01;Hydrocortisone;0
-XXXME020-02;"MEM Eagle (with EBSS); Sigma# M4655-6X500ML";0
-XXXME023-00;Puromycin Dihydrochlorid 10 mg;0
-XXXME023-01;Puromycin Dihydrochlorid 50 mg;0
-XXXME026-02;DPBS 100 ml;0
-XXXME027-02;"TrypLE Select 100 ml; #12563029";0
-XXXME035-01;Trypsin-EDTA (0,25%, 1x conc., 100 ml), Gibco;0
-XXXME035-02;Trypsin-EDTA (0,25%, 1x conc., 20x100 ml), Gibco;0
-XXXME035-03;Trypsin-EDTA (0,25%, 1x conc., 500 ml), Gibco;0
-XXXME039-00;Trypsin inhibitor from Glycine max (soybean);0
-XXXME039-01;Trypsin Inhibitor Type-IIS;0
-XXXME040-00;Ko143 hydrate, Sigma-Aldrich #K2144-1MG;0
-XXXME040-01;Ko143 hydrate, Sigma-Aldrich #K2144-5MG;0
-XXXME041-00;Zosuquidar hydrochloride, Sigma #SML1044-5MG;0
-XXXME041-01;Zosuquidar hydrochloride, Sigma #SML1044-25MG;0
-XXXME042-00;MK-571 sodium salt hydrate, Sigma #M7571-5MG;0
-XXXME042-01;MK-571 sodium salt hydrate, Sigma #M7571-25MG;0
-XXXME043-00;Blasticidine (25mg);0
-XXXME044-00;Normocin (50 mg/ml);0
-XXXME045-02;Hygromycin B 50 mg/ml - 20ml (P06-08020);0
-XXXME045-03;"Hygromycin B 1 g; Carl Roth #CP13.3";0
-XXXME045-04;"Hygromycin B 20 mL; DiscoverX #92-0029";0
-XXXME045-07;"Hygromycin B 5 g; Carl Roth #CP13.4";0
-XXXME046-00;Etoposide;0
-XXXME047-00;Hypericin from Hypericum perforatum, Sigma #56690-1MG;0
-XXXME048-01;Endopan 3, Basal Medium for Endothelial Cells;0
-XXXME048-02;Endopan 3, Supplement Pack;0
-XXXME049-00;Panserin PX40, Complete Medium for Adherent cells, Serum-fr;0
-XXXME054-02;Fetal Bovine Serum, New Zeeland, HYCLSH30406.02;0
-XXXME057-00;"Trifluorothymidine; Sigma #T2255-100MG";0
-XXXME060-02;RM-A: Polyurethane film containing 0.1% zinc 0.5mm, 10x15cm;0
-XXXME061-02;RM-B: Polyurethane film containing 0.25% zinc 0.5mm, 10x15cm;0
-XXXME062-02;RM-C: High density polyethylene film 0.5mm, 10x3cm, 5sheets;0
-XXXME064-00;"Lipoprotein Deficient Serum, human, 100 mg; Sigma# LP4";0
-XXXME069-01;Hydrocortisone, water-soluble, Sigma #H0396-100MG;0
-XXXME070-00;"Panserin 293S, Serum-free medium; #P04-710609";0
-XXXME072-02;Opti-MEM™ I Reduced Serum Medium 100 mL;0
-XXXME073-00;MPT002 Proximal Tubular Cell Culture Medium;0
-XXXME075-00;"Bovine Serum Albumin; Sigma# 05479-50G";0
-XXXME076-01;ITS insulin / transferrin / selenite;0
-XXXME076-04;"ITS Insulin-Transferrin-Sodium Selenite Supplement; Sigma";0
-XXXME080-00;"Trypsin from bovine pancreas; Sigma #T7309-1G";0
-XXXME083-00;ProxUp Supplements;0
-XXXME084-00;"Mycoplasma-Off™; Minerva 5 x 1 litre refill bottles";0
-XXXME085-00;"6-Thioguanine; Sigma# A4882-100MG";0
-XXXME086-00;DMEM/Ham's F-12, ohne L-Glutamin, BioChrom;0
-XXXME088-00;Keratinocyte Culture Medium 500mL (upcyte);0
-XXXME090-00;"Propyl gallate; Sigma# 02370-100G";0
-XXXME091-00;"bisBenzimide H 33342 trihydrochloride; Sigma# B2261-25MG";0
-XXXME092-00;"Tunicamycin from Streptomyces sp.; Sigma #T7765-5MG";0
-XXXME093-00;Goat Serum;0
-XXXME094-00;"BME vitamin solution 100ml; PAN# P08-40100";0
-XXXME095-00;Medium 199, high NaHCO3;0
-XXXME096-00;"AssayComplete™ G418 20 mL; DiscoverX #92-0030";0
-XXXME098-00;"Sebomed® Basalmedium; Biochrom 500ml #F 8205";0
-XXXME102-01;Hyclone HYCLSH30071.03HI, heat Inactivated;0
-XXXME110;Alpha MEM Eagle w/o Ribonucleosides;0
-XXXZG03-03;"CellSTACK, Chamber, 5-STACK, PS, S; IND 1/2";0
-XXXZG03-05;CellSTACK, Chamber 10 STACK, POLSYSTYRENE, STERILE 1/2;0
-XXXZG045-10;Cryovials Nunc  (1,8 ml), Big Pack;0
-XXXZG08-00;ZELLKULTUR MICROPLATTE, 96 WELL, Greiner Bio-One #655946;0
-XXXZG09-00;CELL CULTURE MICROPLATE, 96 WELL PS, Greiner #655940;0
-XXXZG10-00;Transwell 6.5 mm with 0.4 μm pore, 12 Inserts/24-well-Plate;0
-XXXZG12-00;384-well Platte, schwarz, flacher Boden;0
-XXXZG15-00;Nunc™ Edge™ 96-Well, Thermo #167425;0
-ZG00-02;Zellkulturplatte (96-well, clear) - für Cytotox-Kit;0
-ZG01-01;Zellkulturplatte (6-well, clear);0
 ZG01-02;Zellkulturplatte (12-well, clear);0
 ZG01-04;Zellkulturplatte (24-well, clear);0
 ZG01-05;Zellkulturplatte (48-well, clear);0

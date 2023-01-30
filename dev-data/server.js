@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+const bodyParser = require('body-parser');
+app.use(express.urlencoded({ extended: true }), bodyParser());
 
 const port = 3000;
 //outsource this into dotenv file
@@ -11,6 +12,10 @@ const uri =
 
 //SCHEMA
 const itemSchema = mongoose.Schema({
+    id: {
+        type: String,
+        required: true,
+    },
     name: {
         type: String,
         required: true,
@@ -37,7 +42,7 @@ const getItems = async (req, res) => {
     res.status(200).json(items);
 };
 
-//POST ITEM
+// POST ITEM
 const postItem = async (req, res) => {
     try {
         //if (items.find().amount > 0){UPDATE items.find() = items.find() + req.body.amount}
@@ -57,9 +62,54 @@ const postItem = async (req, res) => {
     }
 };
 
+//PATCH ITEM
+const patchItem = async (req, res) => {
+    try {
+        console.log(req.body._id);
+        console.log(req.body.amount);
+        // const updatedItem = new Item(req.body);
+
+        const updatedItem = await Item.findByIdAndUpdate(req.body._id, {
+            amount: req.body.amount,
+        });
+
+        res.status(201).json({
+            status: 'success',
+            item: updatedItem,
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+            data: req.body,
+        });
+    }
+};
+
+const deleteItem = async (req, res) => {
+    try {
+        const updatedItem = await Item.findByIdAndUpdate(req.body._id, {
+            amount: 0,
+        });
+
+        res.status(201).json({
+            status: 'success',
+            item: updatedItem,
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+            data: req.body,
+        });
+    }
+};
+
 //CONTROLLER
 app.get('/api/v1/items', getItems);
 app.post('/api/v1/items', postItem);
+app.patch('/api/v1/items', patchItem);
+app.delete('/api/v1/items', deleteItem);
 
 //SERVER
 async function connect() {

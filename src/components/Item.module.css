@@ -1,3 +1,14 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
 .row {
     display: flex;
     position: relative;
@@ -9,7 +20,7 @@
 }
 
 .column {
-    flex: 1;
+    flex: 3;
 }
 
 .borderChild {
@@ -17,11 +28,68 @@
 }
 
 .trash {
-    color: red;
     position: absolute;
     right: 0;
-    width: 2rem;
-    /* set width same as height for rectangle */
+    overflow: hidden;
+    width: 4rem;
     height: 100%;
-    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to left, #fdacac 50%, #fff 50%);
+    background-size: 200% 100%;
+    background-position: left;
+    transition: all 0.4s ease-out;
+}
+
+/* these animations are supposed for the "order"-items only */
+/* can I get this animation outside the window? */
+.row:hover > .trash > .svg {
+    display: block;
+}
+
+.row:hover > .trash {
+    background-position: right;
+}
+
+.svg {
+    display: none;
+    margin: auto;
+    width: 25px;
+    height: 25px;
+}
+
+.flex {
+    flex: 1;
+}
+
+.delete {
+    transition: all 1s ease-out;
+    background: #fdacac 50%;
+}
+
+.deleteSVG > .trash > .svg {
+    display: block;
+}
+
+.deleteTrash > .trash {
+    background: #fdacac;
+}
+
+.add {
+    background: linear-gradient(to left, #99edc3 50%, #fff 50%);
+    background-size: 200% 100%;
+    background-position: left;
+    transition: all 0.4s ease-out;
+}
+
+.inputDiv {
+    height: 100%;
+    background: #99edc3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    width: 50%;
 }
