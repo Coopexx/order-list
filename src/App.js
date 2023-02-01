@@ -11,6 +11,7 @@ function App() {
     const [renderedList, setRenderedList] = useState({});
     const [listLoaded, setListLoaded] = useState(false);
     const [mode, setMode] = useState(false); //true = Orders, false = All
+    const [showWindow, setShowWindow] = useState(true);
 
     const url = 'http://127.0.0.1:3000/api/v1/items';
 
@@ -36,6 +37,21 @@ function App() {
         setListLoaded(true);
     };
 
+    function compare(a, b) {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    }
+
+    const sortData = (dataObj) => {
+        dataObj.sort(compare);
+        return dataObj;
+    };
+
     //DATA IMPORT
     async function fetchItemsHandler(type) {
         const response = await fetch(url);
@@ -46,8 +62,10 @@ function App() {
                 name: dataObj.name,
                 code: dataObj.code,
                 amount: dataObj.amount,
+                history: dataObj.history,
             };
         });
+        sortData(data);
         setList(data);
         removeEmptyAmounts(data, type);
     }
@@ -95,6 +113,11 @@ function App() {
             });
             setRenderedList(filtered);
         }
+    };
+
+    //HANDLER
+    const toggleHistoryHandler = () => {
+        setShowWindow(!showWindow);
     };
 
     //SWITCH BUTTON VIEW
@@ -148,12 +171,8 @@ function App() {
         }
     };
 
-    useEffect(() => {
-        fetchItemsHandler();
-    }, []);
-
-    return (
-        <div className={styles.background}>
+    const Window = () => {
+        return (
             <div className={styles.window}>
                 <Navigation
                     filterHandler={filterHandler}
@@ -169,10 +188,62 @@ function App() {
                                 add={addAmountHandler}
                                 remove={removeAmountHandler}
                                 flagged={data.flag}
+                                isWindow={true}
                             />
                         ))}
                 </div>
             </div>
+        );
+    };
+
+    const History = () => {
+        return (
+            <div className={styles.historyDiv}>
+                {listLoaded &&
+                    renderedList.map((data, i) => (
+                        <Item
+                            data={renderedList[i]}
+                            key={data.id}
+                            isWindow={false}
+                        />
+                    ))}
+            </div>
+        );
+    };
+
+    useEffect(() => {
+        fetchItemsHandler();
+    }, []);
+
+    return (
+        <div className={styles.background}>
+            {showWindow ? (
+                <div className={styles.window}>
+                    <Navigation
+                        filterHandler={filterHandler}
+                        toggleViewHandler={toggleViewHandler}
+                    />
+                    <Description />
+                    <div className={styles.itemContainer}>
+                        {listLoaded &&
+                            renderedList.map((data, i) => (
+                                <Item
+                                    data={renderedList[i]}
+                                    key={data.id}
+                                    add={addAmountHandler}
+                                    remove={removeAmountHandler}
+                                    flagged={data.flag}
+                                    isWindow={true}
+                                />
+                            ))}
+                    </div>
+                </div>
+            ) : (
+                <History />
+            )}
+            <button className={styles.history} onClick={toggleHistoryHandler}>
+                History
+            </button>
         </div>
     );
 }

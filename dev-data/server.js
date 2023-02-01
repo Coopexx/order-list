@@ -28,6 +28,9 @@ const itemSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    history: {
+        type: Number,
+    },
 });
 
 const Item = mongoose.model('Item', itemSchema); //must match name of collection

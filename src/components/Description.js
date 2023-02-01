@@ -6,7 +6,7 @@ const Description = () => {
         <div className={styles.row}>
             <p className={styles.column}>Item</p>
             <p className={`${styles.column} ${styles.flex}`}>Exact Code</p>
-            <p className={`${styles.column} ${styles.flex}`}>Amount</p>
+            <p className={`${styles.column} ${styles.flex}`}>VE</p>
         </div>
     );
 };

@@ -63,7 +63,7 @@ input[type='number'] {
 }
 
 .delete {
-    transition: all 1s ease-out;
+    transition: all 0.3s ease-out;
     background: #fdacac 50%;
 }
 
@@ -92,4 +92,17 @@ input[type='number'] {
 
 .input {
     width: 50%;
+}
+
+.history {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.biggerFlex {
+    flex: 3;
+}
+.otherItems {
+    flex: 1;
 }
