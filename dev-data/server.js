@@ -1,14 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 
 const app = express();
-const bodyParser = require('body-parser');
+dotenv.config({ path: __dirname + '/./../config.env' });
 app.use(express.urlencoded({ extended: true }), bodyParser());
 
+console.log(process.env);
+
 const port = 3000;
-//outsource this into dotenv file
-const uri =
-    'mongodb+srv://acCELLerate:u74gQ5EpDgFM74mz2TX7@orderlist.tggdj44.mongodb.net/OrderList?retryWrites=true&w=majority';
+const uri = process.env.DATABASE;
 
 //SCHEMA
 const itemSchema = mongoose.Schema({

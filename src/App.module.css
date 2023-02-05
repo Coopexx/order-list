@@ -35,8 +35,7 @@
     overflow: hidden;
     overflow-y: scroll;
 }
-
-.historyDiv {
+` .historyDiv {
     width: 60vw;
     height: fit-content;
     border-radius: 0.5rem;
