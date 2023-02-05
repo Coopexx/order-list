@@ -115,23 +115,8 @@ const Item = (props) => {
         );
     };
 
-    const HistoryItems = () => {
-        return (
-            <div className={styles.history}>
-                <p className={styles.biggerFlex}>{props.data.name}</p>
-                <p className={styles.otherItems}>{props.data.code}</p>
-                <p className={styles.otherItems}>{props.data.amount}</p>
-            </div>
-        );
-    };
-
     //RENDERED HTML__________________________________________________________________________________________________________________________________________
-    return (
-        <React.Fragment>
-            {/* add History Handler to conditionals */}
-            {props.isWindow ? <WindowItems /> : <HistoryItems />}
-        </React.Fragment>
-    );
+    return <React.Fragment>{}</React.Fragment>;
 };
 
 export default Item;

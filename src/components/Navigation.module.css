@@ -31,7 +31,7 @@ input:focus {
 .switch {
     position: relative;
     display: inline-block;
-    width: 6.5rem;
+    width: 15rem;
     height: 2rem;
 }
 

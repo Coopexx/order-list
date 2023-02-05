@@ -7,11 +7,8 @@ import styles from './App.module.css';
 function App() {
     //HOOKS ______________________________________________________________________________________________________________________________________________
     const [list, setList] = useState({});
-    const [filteredList, setFilteredList] = useState({});
-    const [renderedList, setRenderedList] = useState({});
     const [listLoaded, setListLoaded] = useState(false);
-    const 
-    const [switchButton, setSwitchButton] = useState('inProcess');
+    const [type, setType] = useState('inProcess');
 
     useEffect(() => {
         fetchItemsHandler();
@@ -21,7 +18,7 @@ function App() {
     const url = 'http://127.0.0.1:3000/api/v1/items';
 
     //DATA IMPORT _________________________________________________________________________________________________________________________________________
-    async function fetchItemsHandler(type) {
+    async function fetchItemsHandler() {
         const response = await fetch(url);
         const rawData = await response.json();
         const data = rawData.map((dataObj) => {
@@ -35,7 +32,7 @@ function App() {
         });
         sortData(data);
         setList(data);
-        removeEmptyAmounts(data, type);
+        setListLoaded(true);
     }
     const sortData = (dataObj) => {
         dataObj.sort(compare);
@@ -50,27 +47,6 @@ function App() {
         }
         return 0;
     }
-    const removeEmptyAmounts = (data, type) => {
-        let orders = data.filter((dataObj) => {
-            if (dataObj.amount > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-        let flaggedOrders = orders.map((order) => {
-            return { ...order, flag: true };
-        });
-        setFilteredList(flaggedOrders);
-        if (type === 'patch') {
-            setRenderedList(data);
-        } else if (type === 'delete') {
-            setRenderedList(flaggedOrders);
-        } else {
-            setRenderedList(flaggedOrders);
-        }
-        setListLoaded(true);
-    };
 
     //SERVER REQUESTS _____________________________________________________________________________________________________________________________________
     const addAmountHandler = async (dataObj) => {
@@ -112,143 +88,38 @@ function App() {
 
     const deleteAmountHandler = () => {};
 
-    //FILTER ______________________________________________________________________________________________________________________________________________
-    const filterHandler = (searchString) => {
-        if (switchButton) {
-            let filtered = list.filter((data) => {
-                if (
-                    data.name
-                        .toLowerCase()
-                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
-                ) {
-                    return true;
-                }
-                if (
-                    data.code
-                        .toLowerCase()
-                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            setRenderedList(filtered);
-        } else {
-            let filtered = filteredList.filter((data) => {
-                if (
-                    data.name
-                        .toLowerCase()
-                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
-                ) {
-                    return true;
-                }
-                if (
-                    data.code
-                        .toLowerCase()
-                        .includes(searchString.toLowerCase().replace(/\s/g, ''))
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            setRenderedList(filtered);
-        }
-    };
-
     //SWITCH BUTTON _______________________________________________________________________________________________________________________________________
-    const toggleSwitchButton = (state) => {
+    const setTypeHandler = (state) => {
         if (state === 'all') {
-            setSwitchButton('all');
+            setType('all');
         }
         if (state === 'inProcess') {
-            setSwitchButton('inProcess');
+            setType('inProcess');
         }
         if (state === 'finished') {
-            setSwitchButton('afinished');
+            setType('afinished');
         }
-    };
-
-    //HTML ITEMS ___________________________________________________________________________________________________________________________________________
-    const All = () => {
-        return (
-            <div
-                className={styles.window}
-                onClick={() => toggleSwitchButton('all')}
-            >
-                <Navigation filterHandler={filterHandler} />
-                <Description />
-                <div className={styles.itemContainer}>
-                    {listLoaded &&
-                        renderedList.map((data, i) => (
-                            <Item
-                                data={renderedList[i]}
-                                key={data.id}
-                                add={addAmountHandler}
-                                flagged={data.flag}
-                                isWindow={true}
-                            />
-                        ))}
-                </div>
-            </div>
-        );
-    };
-
-    const InProcess = () => {
-        return (
-            <div
-                className={styles.window}
-                onClick={() => toggleSwitchButton('inProcess')}
-            >
-                <Navigation filterHandler={filterHandler} />
-                <Description />
-                <div className={styles.itemContainer}>
-                    {listLoaded &&
-                        renderedList.map((data, i) => (
-                            <Item
-                                data={renderedList[i]}
-                                key={data.id}
-                                type={type}
-                                flagged={data.flag}
-                                isWindow={true}
-                            />
-                        ))}
-                </div>
-            </div>
-        );
-    };
-
-    const Finished = () => {
-        return (
-            <div
-                className={styles.window}
-                onClick={() => toggleSwitchButton('finished')}
-            >
-                <Navigation filterHandler={filterHandler} />
-                <Description />
-                <div className={styles.itemContainer}>
-                    {listLoaded &&
-                        renderedList.map((data, i) => (
-                            <Item
-                                data={renderedList[i]}
-                                key={data.id}
-                                delete={deleteAmountHandler}
-                                flagged={data.flag}
-                                isWindow={true}
-                            />
-                        ))}
-                </div>
-            </div>
-        );
     };
 
     //RENDERED HTML__________________________________________________________________________________________________________________________________________
     return (
         <div className={styles.background}>
-            {switchButton === 'all' && <All />}
-            {switchButton === 'inProcess' && <InProcess />}
-            {switchButton === 'finished' && <Finished />}
+            <div className={styles.window}>
+                <Navigation />
+                <Description />
+                <div className={styles.itemContainer}>
+                    {listLoaded &&
+                        list.map((data, i) => (
+                            <Item
+                                data={data[i]}
+                                key={data.id}
+                                type={type}
+                                setTypeHandler={setTypeHandler}
+                            />
+                        ))}
+                </div>
+            </div>
+            ;
         </div>
     );
 }
