@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
 const app = express();
-dotenv.config({ path: __dirname + '/./../config.env' });
+dotenv.config({ path: __dirname + '/./../var.env' });
 app.use(express.urlencoded({ extended: true }), bodyParser());
 
 console.log(process.env);
