@@ -1,12 +1,19 @@
-import { click } from '@testing-library/user-event/dist/click';
 import React, { useState } from 'react';
 
 import styles from './Navigation.module.css';
 
 const Navigation = (props) => {
+    //HOOKS________________________________________________________________________________________________________________________________________________
     const [textfield, setTextfield] = useState('');
     const [filter, setFilter] = useState('');
 
+    //FILTER_______________________________________________________________________________________________________________________________________________
+    const filterChangeHandler = (event) => {
+        setFilter(event.target.value);
+        props.filterHandler(event.target.value);
+    };
+
+    //HANDLER______________________________________________________________________________________________________________________________________________
     const showTextfield = () => {
         if (textfield) {
             setTextfield('');
@@ -14,14 +21,10 @@ const Navigation = (props) => {
             setTextfield(1);
         }
     };
+
     const formSubmitHandler = (event) => {
         event.preventDefault();
         setFilter('');
-    };
-
-    const filterChangeHandler = (event) => {
-        setFilter(event.target.value);
-        props.filterHandler(event.target.value);
     };
 
     const changeModeHandler = () => {
@@ -30,6 +33,7 @@ const Navigation = (props) => {
         setTextfield('');
     };
 
+    //RENDERED HTML_______________________________________________________________________________________________________________________________________
     return (
         <div className={styles.background}>
             <div className={styles.column}>

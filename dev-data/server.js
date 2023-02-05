@@ -1,14 +1,15 @@
+//IMPORTS
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const bodyParser = require('body-parser');
 
+//SETUP
 const app = express();
-dotenv.config({ path: __dirname + '/./../var.env' });
-app.use(express.urlencoded({ extended: true }), bodyParser());
+dotenv.config({ path: __dirname + '/./../config.env' });
+app.use(express.urlencoded({ extended: true }));
+mongoose.set('strictQuery', true);
 
-console.log(process.env);
-
+//VARIABLES
 const port = 3000;
 const uri = process.env.DATABASE;
 
@@ -34,23 +35,21 @@ const itemSchema = mongoose.Schema({
         type: Number,
     },
 });
-
 const Item = mongoose.model('Item', itemSchema); //must match name of collection
 
+//GET ITEM
 async function displayAll() {
     const items = await Item.find();
     return items;
 }
-
 const getItems = async (req, res) => {
     const items = await displayAll();
     res.status(200).json(items);
 };
 
-// POST ITEM
+//POST ITEM
 const postItem = async (req, res) => {
     try {
-        //if (items.find().amount > 0){UPDATE items.find() = items.find() + req.body.amount}
         const newItem = await Item.create(req.body);
 
         res.status(201).json({
@@ -70,10 +69,6 @@ const postItem = async (req, res) => {
 //PATCH ITEM
 const patchItem = async (req, res) => {
     try {
-        console.log(req.body._id);
-        console.log(req.body.amount);
-        // const updatedItem = new Item(req.body);
-
         const updatedItem = await Item.findByIdAndUpdate(req.body._id, {
             amount: req.body.amount,
         });
@@ -91,6 +86,7 @@ const patchItem = async (req, res) => {
     }
 };
 
+//DELETE ITEM
 const deleteItem = async (req, res) => {
     try {
         const updatedItem = await Item.findByIdAndUpdate(req.body._id, {
@@ -116,7 +112,7 @@ app.post('/api/v1/items', postItem);
 app.patch('/api/v1/items', patchItem);
 app.delete('/api/v1/items', deleteItem);
 
-//SERVER
+//DATABASE
 async function connect() {
     try {
         await mongoose.connect(uri);
@@ -127,6 +123,7 @@ async function connect() {
 }
 connect();
 
+//SERVER
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
 });

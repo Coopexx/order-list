@@ -3,10 +3,29 @@ import styles from './Item.module.css';
 const classNames = require('classnames');
 
 const Item = (props) => {
+    //HOOKS ______________________________________________________________________________________________________________________________________________
     const [isActive, setIsActive] = useState(false);
     const [add, setAdd] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
+    //HANDLER ____________________________________________________________________________________________________________________________________________
+    const changeClassHandler = () => {
+        if (isActive) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    const inputChangeHandler = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    //ADD ________________________________________________________________________________________________________________________________________________
+    const addItemHandler = () => {
+        setAdd(true);
+    };
+
+    //REMOVE ______________________________________________________________________________________________________________________________________________
     const removeItemHandler = () => {
         setIsActive(true);
         props.remove({
@@ -16,23 +35,11 @@ const Item = (props) => {
             amount: props.data.amount,
         });
     };
-
-    const addItemHandler = () => {
-        setAdd(true);
-    };
-
     const removeInputHandler = () => {
         setAdd(false);
     };
 
-    const changeClassHandler = () => {
-        if (isActive) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
+    //FORM SUBMIT _________________________________________________________________________________________________________________________________________
     const formSubmitHandler = (event) => {
         event.preventDefault();
         props.add({
@@ -44,10 +51,7 @@ const Item = (props) => {
         setInputValue('');
     };
 
-    const inputChangeHandler = (event) => {
-        setInputValue(event.target.value);
-    };
-
+    //HTML ITEMS____________________________________________________________________________________________________________________________________________
     const WindowItems = () => {
         return (
             <div
@@ -121,8 +125,10 @@ const Item = (props) => {
         );
     };
 
+    //RENDERED HTML__________________________________________________________________________________________________________________________________________
     return (
         <React.Fragment>
+            {/* add History Handler to conditionals */}
             {props.isWindow ? <WindowItems /> : <HistoryItems />}
         </React.Fragment>
     );

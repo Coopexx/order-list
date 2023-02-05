@@ -2,19 +2,54 @@ import React, { useState, useEffect } from 'react';
 import Item from './components/Item';
 import Navigation from './components/Navigation';
 import Description from './components/Description';
-
 import styles from './App.module.css';
 
 function App() {
+    //HOOKS ______________________________________________________________________________________________________________________________________________
     const [list, setList] = useState({});
     const [filteredList, setFilteredList] = useState({});
     const [renderedList, setRenderedList] = useState({});
     const [listLoaded, setListLoaded] = useState(false);
-    const [mode, setMode] = useState(false); //true = Orders, false = All
-    const [showWindow, setShowWindow] = useState(true);
+    const 
+    const [switchButton, setSwitchButton] = useState('inProcess');
 
+    useEffect(() => {
+        fetchItemsHandler();
+    }, []);
+
+    //VARIABLES ___________________________________________________________________________________________________________________________________________
     const url = 'http://127.0.0.1:3000/api/v1/items';
 
+    //DATA IMPORT _________________________________________________________________________________________________________________________________________
+    async function fetchItemsHandler(type) {
+        const response = await fetch(url);
+        const rawData = await response.json();
+        const data = rawData.map((dataObj) => {
+            return {
+                id: dataObj._id,
+                name: dataObj.name,
+                code: dataObj.code,
+                amount: dataObj.amount,
+                history: dataObj.history,
+            };
+        });
+        sortData(data);
+        setList(data);
+        removeEmptyAmounts(data, type);
+    }
+    const sortData = (dataObj) => {
+        dataObj.sort(compare);
+        return dataObj;
+    };
+    function compare(a, b) {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    }
     const removeEmptyAmounts = (data, type) => {
         let orders = data.filter((dataObj) => {
             if (dataObj.amount > 0) {
@@ -37,42 +72,49 @@ function App() {
         setListLoaded(true);
     };
 
-    function compare(a, b) {
-        if (a.name < b.name) {
-            return -1;
+    //SERVER REQUESTS _____________________________________________________________________________________________________________________________________
+    const addAmountHandler = async (dataObj) => {
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObj),
+            });
+            const content = await response.json();
+            //Include in notification upper right corner
+            // console.log(content);
+            fetchItemsHandler('patch');
+        } catch (err) {
+            console.log(err);
         }
-        if (a.name > b.name) {
-            return 1;
+    };
+    const removeAmountHandler = async (dataObj) => {
+        try {
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObj),
+            });
+            const content = await response.json();
+            //Include in notification upper right corner
+            // console.log(content);
+            fetchItemsHandler('delete');
+        } catch (err) {
+            console.log(err);
         }
-        return 0;
-    }
-
-    const sortData = (dataObj) => {
-        dataObj.sort(compare);
-        return dataObj;
     };
 
-    //DATA IMPORT
-    async function fetchItemsHandler(type) {
-        const response = await fetch(url);
-        const rawData = await response.json();
-        const data = rawData.map((dataObj) => {
-            return {
-                id: dataObj._id,
-                name: dataObj.name,
-                code: dataObj.code,
-                amount: dataObj.amount,
-                history: dataObj.history,
-            };
-        });
-        sortData(data);
-        setList(data);
-        removeEmptyAmounts(data, type);
-    }
+    const deleteAmountHandler = () => {};
 
-    //FILTER
+    //FILTER ______________________________________________________________________________________________________________________________________________
     const filterHandler = (searchString) => {
-        if (mode) {
+        if (switchButton) {
             let filtered = list.filter((data) => {
                 if (
                     data.name
@@ -115,69 +157,27 @@ function App() {
         }
     };
 
-    //HANDLER
-    const toggleHistoryHandler = () => {
-        setShowWindow(!showWindow);
-    };
-
-    //SWITCH BUTTON VIEW
-    const toggleViewHandler = () => {
-        if (mode === true) {
-            setMode(false);
-            setRenderedList(filteredList);
-        } else {
-            setMode(true);
-            setRenderedList(list);
+    //SWITCH BUTTON _______________________________________________________________________________________________________________________________________
+    const toggleSwitchButton = (state) => {
+        if (state === 'all') {
+            setSwitchButton('all');
+        }
+        if (state === 'inProcess') {
+            setSwitchButton('inProcess');
+        }
+        if (state === 'finished') {
+            setSwitchButton('afinished');
         }
     };
 
-    //SERVER REQUESTS
-    //UPDATE dbAmount + itemAmount
-    const addAmountHandler = async (dataObj) => {
-        try {
-            const response = await fetch(url, {
-                method: 'PATCH',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dataObj),
-            });
-            const content = await response.json();
-            //Include in notification upper right corner
-            // console.log(content);
-            fetchItemsHandler('patch');
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const removeAmountHandler = async (dataObj) => {
-        try {
-            const response = await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dataObj),
-            });
-            const content = await response.json();
-            //Include in notification upper right corner
-            // console.log(content);
-            fetchItemsHandler('delete');
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const Window = () => {
+    //HTML ITEMS ___________________________________________________________________________________________________________________________________________
+    const All = () => {
         return (
-            <div className={styles.window}>
-                <Navigation
-                    filterHandler={filterHandler}
-                    toggleViewHandler={toggleViewHandler}
-                />
+            <div
+                className={styles.window}
+                onClick={() => toggleSwitchButton('all')}
+            >
+                <Navigation filterHandler={filterHandler} />
                 <Description />
                 <div className={styles.itemContainer}>
                     {listLoaded &&
@@ -186,7 +186,6 @@ function App() {
                                 data={renderedList[i]}
                                 key={data.id}
                                 add={addAmountHandler}
-                                remove={removeAmountHandler}
                                 flagged={data.flag}
                                 isWindow={true}
                             />
@@ -196,54 +195,60 @@ function App() {
         );
     };
 
-    const History = () => {
+    const InProcess = () => {
         return (
-            <div className={styles.historyDiv}>
-                {listLoaded &&
-                    renderedList.map((data, i) => (
-                        <Item
-                            data={renderedList[i]}
-                            key={data.id}
-                            isWindow={false}
-                        />
-                    ))}
+            <div
+                className={styles.window}
+                onClick={() => toggleSwitchButton('inProcess')}
+            >
+                <Navigation filterHandler={filterHandler} />
+                <Description />
+                <div className={styles.itemContainer}>
+                    {listLoaded &&
+                        renderedList.map((data, i) => (
+                            <Item
+                                data={renderedList[i]}
+                                key={data.id}
+                                type={type}
+                                flagged={data.flag}
+                                isWindow={true}
+                            />
+                        ))}
+                </div>
             </div>
         );
     };
 
-    useEffect(() => {
-        fetchItemsHandler();
-    }, []);
+    const Finished = () => {
+        return (
+            <div
+                className={styles.window}
+                onClick={() => toggleSwitchButton('finished')}
+            >
+                <Navigation filterHandler={filterHandler} />
+                <Description />
+                <div className={styles.itemContainer}>
+                    {listLoaded &&
+                        renderedList.map((data, i) => (
+                            <Item
+                                data={renderedList[i]}
+                                key={data.id}
+                                delete={deleteAmountHandler}
+                                flagged={data.flag}
+                                isWindow={true}
+                            />
+                        ))}
+                </div>
+            </div>
+        );
+    };
 
+    //RENDERED HTML__________________________________________________________________________________________________________________________________________
     return (
         <div className={styles.background}>
-            {showWindow ? (
-                <div className={styles.window}>
-                    <Navigation
-                        filterHandler={filterHandler}
-                        toggleViewHandler={toggleViewHandler}
-                    />
-                    <Description />
-                    <div className={styles.itemContainer}>
-                        {listLoaded &&
-                            renderedList.map((data, i) => (
-                                <Item
-                                    data={renderedList[i]}
-                                    key={data.id}
-                                    add={addAmountHandler}
-                                    remove={removeAmountHandler}
-                                    flagged={data.flag}
-                                    isWindow={true}
-                                />
-                            ))}
-                    </div>
-                </div>
-            ) : (
-                <History />
-            )}
-            <button className={styles.history} onClick={toggleHistoryHandler}>
-                History
-            </button>
+            {switchButton === 'all' && <All />}
+            {switchButton === 'inProcess' && <InProcess />}
+            {switchButton === 'finished' && <Finished />}
         </div>
     );
 }
